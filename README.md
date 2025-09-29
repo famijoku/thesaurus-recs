@@ -6,7 +6,7 @@ This program generally searches for synonyms in WordNet and ranks the results by
 ### Setup:
 
 If not already installed, you will first need to install python (Thesaurus Recs uses Python 3.13).
-Then, in the terminal, navigate to your thesaurus_recs folder, create and activate your virtual environment, and install the required packages:
+Then, in the terminal, navigate to your thesaurus_recs folder, create and activate your virtual environment, install the required packages and execute the setup.py:
 
 On Linux or MacOS:
 ```
@@ -16,17 +16,20 @@ $ pip install -r requirements.txt
 ```
 On Windows:
 ```
->>> python -m venv venv
->>> venv\Scripts\activate
->>> pip install -r requirements.txt
+thesaurus-recs> python -m venv venv
+thesaurus-recs> venv\Scripts\activate
+thesaurus-recs> pip install -r requirements.txt
 ```
 
 On further use, you will only need to activate the venv again (2nd line) and you'll be able to use Thesaurus Recs with:
 
 ```
->>> python trecs.py [options]
+$ python3 trecs.py [options]
 ```
-
+```
+thesaurus-recs> python trecs.py [options]
+```
+on Windows.
 
 ### The options:
 
@@ -37,7 +40,7 @@ The mode in which to run Thesaurus Recs. Valid arguments are `simple`, `interact
 The word for which synonyms will be retrieved. Required in simple and interactive mode, optional in document mode.
 
 `--pos`
-Part of speech of the specified word (relevant for simple mode, interactive mode and document mode if `—full_context` is used). Helps facilitate word sense disambiguation. Valid options are `noun`, `verb`, `adj`, and `adv`.
+Part of speech of the specified word (relevant for simple mode, interactive mode and document mode if `--full_context` is used). Helps facilitate word sense disambiguation. Valid options are `noun`, `verb`, `adj`, and `adv`.
 
 `--file` (`-f`)
 Path to the input file for document mode.
@@ -90,13 +93,13 @@ Display the calculated similarities of the synonyms to the input word. This can 
 
 Example usage:
 ```
->>> python trecs.py -w cold
+$ python3 trecs.py -w cold
 Found 12 synonyms of cold in wordnet:
 cold-blooded, frigid, coldness, stale, dusty, moth-eaten, inhuman, frigidity, insensate, common_cold, low_temperature, frigidness
 ```
 Now, if you decide that you only want the adjectives, that four synonyms are enough, and that you want to know the calculated similarities:
 ```
->>> python trecs.py -w cold --pos adj --max 4 --display_similarities
+$ python3 trecs.py -w cold --pos adj --max 4 --display_similarities
 Found 7 synonyms of cold as adj in wordnet, displaying first 4 results by similarity:
 cold-blooded (0.76), frigid (0.64), stale (0.41), dusty (0.37)
 ```
@@ -123,7 +126,7 @@ Example usage:
 
 1. 
 ```
->>> python trecs.py -m interactive
+$ python3 trecs.py -m interactive
 Please enter a word:
 >map
 Enter the context of the word (optional)
@@ -138,7 +141,7 @@ represent
 
 2. 
 ```
-python trecs.py -m interactive -w fire --pos verb --display_similarities
+$ python3 trecs.py -m interactive -w fire --pos verb --display_similarities
 Enter the context of the word (optional)
 >the boss fired an employee
 WSD result: Synset('displace.v.03') (terminate the employment of; discharge from an office or position)
@@ -161,7 +164,7 @@ Here, we can see that a lot of synonyms have a similarity of 0. This is not beca
 
 3. 
 ```
->>> python trecs.py -m interactive -w dagger
+$ python3 trecs.py -m interactive -w dagger
 Enter the context of the word (optional)
 >the killer used a dagger
 WSD result: Synset('dagger.n.02') (a character used in printing to indicate a cross reference or footnote)
@@ -213,7 +216,7 @@ Example usage:
 
 1. No word entered
 ```
->>> python trecs.py -m document -f ./testing/macbeth.txt --max 5 --display_similarities
+$ python3 trecs.py -m document -f ./testing/macbeth.txt --max 5 --display_similarities
 Running document mode. No word specified, searching for synonyms for the 3 most frequent word(s).
 
 Most frequent word: macbeth (285 occurrences)
@@ -233,7 +236,7 @@ thousand (0.35), K (0.19), M (0.18), G (0.16), yard (0.12)`
 Here we can see that *Macbeth* has an entry in Wordnet, but of course no relevant synonyms. Furthermore, *thou* is interpreted as a short form of *thousand*. We might want to exclude those two:
 
 ```
->>> python trecs.py -m document -f ./testing/macbeth.txt --max 5 --display_similarities -x macbeth thou
+$ python3 trecs.py -m document -f ./testing/macbeth.txt --max 5 --display_similarities -x macbeth thou
 Running document mode. No word specified, searching for synonyms for the 3 most frequent word(s).
 
 Most frequent word: lady (95 occurrences)
@@ -254,7 +257,7 @@ Now we additionally get synonyms for *enter* and *yet*, which are more helpful.
 
 2. Word entered, varying context
 ```
->>> python trecs.py -m document -f ./testing/macbeth.txt -w witch --max 5 --display_similarities
+$ python3 trecs.py -m document -f ./testing/macbeth.txt -w witch --max 5 --display_similarities
 Running document mode for word 'witch'.
 
 Found 52 occurrences of witch.
@@ -281,7 +284,7 @@ Here, we can see that even though the word *witch* occurs 52 times, only three s
 
 3. Word entered, full context
 ```
->>> python trecs.py -m document -f ./testing/macbeth.txt -w witch --max 5 --display_similarities --full_context
+$ python3 trecs.py -m document -f ./testing/macbeth.txt -w witch --max 5 --display_similarities --full_context
 Running document mode for word 'witch', using the whole document as context.
 
 For the given text as context found word sense Synset('hex.v.01') (cast a spell over someone or something; put a hex on someone or something)
@@ -294,7 +297,7 @@ bewitch (0.19)
 ```
 Once again, WSD performs poorly. Here however, we can specify the part of speech as a noun:
 ```
->>> python trecs.py -m document -f ./testing/macbeth.txt -w witch --max 5 --display_similarities --full_context --pos noun
+$ python3 trecs.py -m document -f ./testing/macbeth.txt -w witch --max 5 --display_similarities --full_context --pos noun
 Running document mode for word witch, using the whole document as context.
 
 For the given text as context found word sense Synset('witch.n.02') (a being (usually female) imagined to have special powers derived from the devil)

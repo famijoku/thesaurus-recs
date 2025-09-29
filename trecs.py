@@ -1,4 +1,3 @@
-import nltk
 import warnings
 import argparse
 
@@ -7,12 +6,8 @@ from config import config
 
 def main():
     if config['suppress_warnings']:
-        warnings.filterwarnings("ignore", message='.*vectors.*')
+        warnings.filterwarnings("ignore", message='.*vectors.*') # ignore spacy warnings if set in config
 
-    try:
-        nltk.data.find('corpora/wordnet')
-    except LookupError:
-        nltk.download('wordnet')
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', '-m',
