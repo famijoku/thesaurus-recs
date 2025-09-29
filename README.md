@@ -6,28 +6,31 @@ This program generally searches for synonyms in WordNet and ranks the results by
 ### Setup:
 
 If not already installed, you will first need to install python (Thesaurus Recs uses Python 3.13).
-Then, in the terminal, navigate to your thesaurus_recs folder, create and activate your virtual environment, install the required packages and execute the setup.py:
+Then, in the terminal, navigate to your thesaurus_recs folder, create and activate your virtual environment, install the required packages and execute the nltk_setup.py:
 
 On Linux or MacOS:
 ```
 $ python -m venv venv
 $ source venv/bin/activate
 $ pip install -r requirements.txt
+$ python3 nltk_setup.py
 ```
 On Windows:
 ```
-thesaurus-recs> python -m venv venv
-thesaurus-recs> venv\Scripts\activate
-thesaurus-recs> pip install -r requirements.txt
+thesaurus-recs>python -m venv venv
+thesaurus-recs>venv\Scripts\activate
+thesaurus-recs>pip install -r requirements.txt
+thesaurus-recs>python setup.py
 ```
 
-On further use, you will only need to activate the venv again (2nd line) and you'll be able to use Thesaurus Recs with:
+On further use, you will only need to activate the venv again (2nd line) and you'll be able to use Thesaurus Recs with
 
 ```
 $ python3 trecs.py [options]
 ```
+on Linux/MacOS and with
 ```
-thesaurus-recs> python trecs.py [options]
+thesaurus-recs>python trecs.py [options]
 ```
 on Windows.
 
