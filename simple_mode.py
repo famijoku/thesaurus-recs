@@ -3,9 +3,18 @@ from nltk.corpus import wordnet as wn
 
 from helpers import load_model
 
+
 nlp_model = load_model()
 
-def get_synonyms_with_similarity(word, pos):
+
+def get_synonyms_with_similarity(word, pos, nlp_model):
+    """
+    Gets synonyms of the input word, calculates their similarities and returns a Dataframe sorted by similarity.
+    :param word: input word
+    :param pos: part of speech of the input word
+    :param nlp_model: spacy model used for embeddings
+    :return: DataFrame of synonyms and their similarities to the input word
+    """
     word_nlp = nlp_model(word)
     if pos is None:
         synsets = wn.synsets(word)
@@ -32,9 +41,18 @@ def get_synonyms_with_similarity(word, pos):
 
 
 def run_simple_mode(word, pos, max_syn, display_similarities):
-    if word is None:
+    """
+    Runs simple mode.
+    :param word: input word
+    :param pos: part of speech of the input word (for filtering synonyms)
+    :param max_syn: maximum number of synonyms to display
+    :param display_similarities: display the similarities of the synonyms to the input word
+    """
+    while not word:
         word = input('Please enter a word:\n>')
-    syn_sim_df = get_synonyms_with_similarity(word, pos)
+        if word == '':
+            print('Invalid input!')
+    syn_sim_df = get_synonyms_with_similarity(word, pos, nlp_model)
     synonyms = list(syn_sim_df['synonym'])
     similarities = list(syn_sim_df['similarity'])
     output_message = f'Found {len(synonyms)} synonyms of {word + (f' as {pos}' if pos is not None else '')} in wordnet'

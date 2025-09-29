@@ -2,15 +2,27 @@ from pywsd import simple_lesk
 from nltk.corpus import wordnet as wn
 
 from helpers import sort_synonyms_by_similarity, load_model
+
+
 nlp_model = load_model()
 
-def run_interactive_mode(word, pos, max_syn, display_similarities): # ADD POS FUNCTIONALITY
+
+def run_interactive_mode(word, pos, max_syn, display_similarities):
+    """
+    Runs interactive mode.
+    :param word: input word
+    :param pos: part of speech of the input word (helps facilitate word sense disambiguation)
+    :param max_syn: maximum number of synonyms to display
+    :param display_similarities: display the similarities of the synonyms to the input word
+    """
+    if pos is not None:
+        pos = ['n', 'v', 'a', 'r'][['noun', 'verb', 'adj', 'adv'].index(pos)]
     while not word:
         word = input('Please enter a word:\n>')
         if word == '':
             print('Invalid input!')
     context = input('Enter the context of the word (optional)\n>')
-    slesk_result = simple_lesk(context, word)
+    slesk_result = simple_lesk(context, word, pos)
     print(f'WSD result: {slesk_result} ({slesk_result.definition()})')
     action = input('[c]ontinue with this sense, [l]ist all senses or [q]uit?\n>')
     while action != 'q':
@@ -22,7 +34,7 @@ def run_interactive_mode(word, pos, max_syn, display_similarities): # ADD POS FU
             chosen_sense = slesk_result
             break
         elif action == 'l':
-            for id, sense in enumerate(wn.synsets(word)):
+            for id, sense in enumerate(wn.synsets(word, pos)):
                 print(f'{id}: {sense} ({sense.definition()})')
             choice = input('\nEnter the number of the sense of choice or [c]ancel:\n>')
             if choice == 'c':
@@ -30,7 +42,7 @@ def run_interactive_mode(word, pos, max_syn, display_similarities): # ADD POS FU
                 action = input('[c]ontinue with this sense, [l]ist all senses or [q]uit?\n>')
             else:
                 try:
-                    chosen_sense = wn.synsets(word)[int(choice)]
+                    chosen_sense = wn.synsets(word, pos)[int(choice)]
                     break
                 except IndexError:
                     print('Invalid index! Pick one of the listed senses or [c]ancel.\n')

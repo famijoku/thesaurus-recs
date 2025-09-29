@@ -8,6 +8,9 @@ from config import config
 
 
 def load_model():
+    """
+    Loads model (depending on the model chosen in config) and installs it beforehand if not yet installed.
+    """
     if config['model'] == 'large':
         model = 'en_core_web_lg'
     else:
@@ -19,6 +22,13 @@ def load_model():
 
 
 def sort_synonyms_by_similarity(word, synset, nlp_model):
+    """
+    Returns a DataFrame of all lemmas of a synset (intended: synonym to the input word), sorted by their similarity to the input word.
+    :param word: input word
+    :param synset: synset from which lemmas are retrieved
+    :param nlp_model: spacy model used for embeddings
+    :return: DataFrame of input synset's lemmas and their similarities to the input word
+    """
     word_nlp = nlp_model(word)
     lemma_names = [str(lemma.name()) for lemma in synset.lemmas()]
     if word in lemma_names:
