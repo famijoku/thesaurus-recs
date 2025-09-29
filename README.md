@@ -187,7 +187,7 @@ If you are dissatisfied with the result of the WSD - which may happen quite ofte
 
 ### Document mode:
 In document mode, you can either: 
-- not enter a word: the most frequent non-stopword and non-excluded words of the document text will be determined, and simple mode will be performed on each of them
+- not enter a word: the most frequent non-stopword and non-excluded words of the document text will be determined, and simple mode will be performed on each of them. Different words may appear when running this multiple times with the same parameters, if they have the same frequency in the text.
 - enter a word: if `--full_context` is used, WSD will be performed using the whole document as context and the synonyms for the found sense will be output sorted by similarity. Otherwise, WSD will be performed on each occurrence of the word, using a window of tokens (the size of which can be set in the config.py) around it as context and the synonyms for each sense will be output sorted by similarity. If a certain sense has already appeared, following occurrences assigned that sense will be ignored, as not to output a lot of duplicates for large texts.
 
 Options for this mode are:
