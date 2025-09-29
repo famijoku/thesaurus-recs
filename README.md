@@ -20,7 +20,7 @@ On Windows:
 thesaurus-recs>python -m venv venv
 thesaurus-recs>venv\Scripts\activate
 thesaurus-recs>pip install -r requirements.txt
-thesaurus-recs>python setup.py
+thesaurus-recs>python nltk_setup.py
 ```
 
 On further use, you will only need to activate the venv again (2nd line) and you'll be able to use Thesaurus Recs with
