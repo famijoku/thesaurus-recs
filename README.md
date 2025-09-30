@@ -1,6 +1,6 @@
-## Thank you for installing, and welcome to Thesaurus Recs., a synonym suggestor based on WordNet in NLTK and SpaCy.
+## Thank you for installing, and welcome to Thesaurus Recs., a synonym suggestor based on WordNet in NLTK and spaCy.
 
-This program generally searches for synonyms in WordNet and ranks the results by similarity to the input word, using word embeddings from SpaCy[^1]. The exact function depends on the mode used. Modes are specified using --mode (-m). The modes are simple, interactive and document.
+This program generally searches for synonyms in WordNet and ranks the results by similarity to the input word, using word embeddings from spaCy[^1]. The exact function depends on the mode used. Modes are specified using --mode (-m). The modes are simple, interactive and document.
 
 
 ### Setup:
@@ -49,7 +49,7 @@ Part of speech of the specified word (relevant for simple mode, interactive mode
 Path to the input file for document mode.
 
 `--max`
-Maximum number of synonyms to display. Default can be set in the config.py. *Note: this may not always be beneficial, as synonyms that do not have an embedding in SpaCy will be assigned a similarity of 0 and will therefore be relatively low in the ranking.*
+Maximum number of synonyms to display. Default can be set in the config.py. *Note: this may not always be beneficial, as synonyms that do not have an embedding in spaCy will be assigned a similarity of 0 and will therefore be relatively low in the ranking.*
 
 `--display_similarities`
 Display the calculated similarities of the synonyms to the input word. This can be turned on by default in the config.py.
@@ -72,13 +72,13 @@ In this file, you can change some of the default behaviours. You can set or chan
 - `default_number_of_words`: the default number of most frequent words for which to seach for synonyms in document mode (any positive integer)
 - `excluded_words`: a list of words to be excluded by default from being counted for the most frequent words in document mode (list of strings)
 - `docmode_context_window`: how many non-stopword tokens before and after each occurrence of the input word are to be used as context for WSD in document mode (any positive integer)
-- `suppress_warnings`: whether or not to suppress warnings from SpaCy about 
+- `suppress_warnings`: whether or not to suppress warnings from spaCy about 
     - distance calculations with empty vectors (if a synonym has no vector representation)
     - using the small model, which does not use word vectors
 
 
 ### Simple Mode:
-In simple mode, all lemmas of all synonyms of the specified word are retrieved from WordNet, their embeddings (if existent) retrieved from SpaCy, and finally output ranked by similarity[^1].
+In simple mode, all lemmas of all synonyms of the specified word are retrieved from WordNet, their embeddings (if existent) retrieved from spaCy, and finally output ranked by similarity[^1].
 
 Options for this mode are:
 
@@ -163,7 +163,7 @@ give_the_axe (0.0)
 force_out (0.0)
 give_the_sack (0.0)
 ```
-Here, we can see that a lot of synonyms have a similarity of 0. This is not because they are dissimilar, but because they have no embedding in the SpaCy model.
+Here, we can see that a lot of synonyms have a similarity of 0. This is not because they are dissimilar, but because they have no embedding in the spaCy model.
 
 3. 
 ```
@@ -309,4 +309,4 @@ No synonyms found.
 Here, the correct interpretation is chosen, but sadly WordNet does not have any synonyms for that sense.
 
 
-[^1]: A similarity of 0 does not necessarily mean a low similarity, most often the word just does not have an embedding in SpaCy.
+[^1]: A similarity of 0 does not necessarily mean a low similarity, most often the word just does not have an embedding in spaCy.
